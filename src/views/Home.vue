@@ -1,13 +1,14 @@
 <template lang="pug">
   .home 
-    h1 {{ title }} | Company Inc.
+    h1 {{ title.toUpperCase() }} | Company Inc.
     input(
       type="text"
+      @keyup="updateTitle(newTitle)"
       v-model="newTitle"
     )
-    button(
-      @click="updateTitle(newTitle)"
-    ) Write Title
+    //- button(
+    //-   @click="updateTitle(newTitle)"
+    //- ) Write Title
 </template>
 
 <script>
@@ -17,9 +18,10 @@
 export default {
   name: 'Home',
   data() {
+    const title = 'Vue Crash Course'
     return {
-      title: 'Vue Crash Course',
-      newTitle: ''
+      title,
+      newTitle: title
     }
   },
   created() {
