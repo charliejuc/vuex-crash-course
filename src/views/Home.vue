@@ -1,6 +1,13 @@
 <template lang="pug">
   .home 
     h1 {{ title }} | Company Inc.
+    input(
+      type="text"
+      v-model="newTitle"
+    )
+    button(
+      @click="updateTitle(newTitle)"
+    ) Write Title
 </template>
 
 <script>
@@ -11,13 +18,17 @@ export default {
   name: 'Home',
   data() {
     return {
-      title: 'Vue Crash Course'
+      title: 'Vue Crash Course',
+      newTitle: ''
     }
   },
   created() {
-    setTimeout(() => {
-      this.title = 'Título Ninja'
-    }, 3000)
+    // setTimeout(() => this.updateTitle('Título Ninja 2'), 3000)
+  },
+  methods: {
+    updateTitle(title) {
+      this.title = title
+    }
   }
   // components: {
   //   HelloWorld
