@@ -8,6 +8,8 @@
       .input
         input(
           type="text"
+          @keyup.down="increaseTitleMarginTop"
+          @keyup.up="decreaseTitleMarginTop"
           @keyup="updateTitle(newTitle)"
           v-model="newTitle"
         )
@@ -53,6 +55,19 @@ export default {
       }
 
       return `${text.slice(0, descriptionMaxChars)}...`
+    },
+    modifyTitleMarginTop(modifierCb) {
+      const title = this.$el.querySelector('h1')
+      const oldMarginTop = getComputedStyle(title).marginTop
+      const newMarginTop = modifierCb(Number(oldMarginTop.slice(0, -2)))
+
+      title.style.marginTop = `${newMarginTop}px`
+    },
+    increaseTitleMarginTop() {
+      this.modifyTitleMarginTop(oldMarginTop => oldMarginTop + 40)
+    },
+    decreaseTitleMarginTop() {
+      this.modifyTitleMarginTop(oldMarginTop => oldMarginTop - 40)
     }
   }
   // components: {
