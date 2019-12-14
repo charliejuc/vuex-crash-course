@@ -17,6 +17,25 @@
         textarea(
           v-model="description"
         )
+      .input
+        input(
+          type="text"
+          v-model="newPokemon"
+          @keyup.enter="createPokemon"
+        )
+    
+    ul
+      li(
+        v-for="pokemon of pokemons"
+      ) 
+        div
+          span {{ pokemon.name }} 
+          input(type="number", v-model.number="pokemon.attack")
+          input(type="number", v-model.number="pokemon.defense")
+    
+    //- h3 Daño total: {{ pokemons.reduce((acc, curr) => ({ attack: acc.attack + curr.attack })).attack }}
+    h3 Daño total: {{ totalDamage }}
+      
     //- button(
     //-   @click="updateTitle(newTitle)"
     //- ) Write Title
@@ -34,7 +53,20 @@ export default {
     return {
       title,
       newTitle: title,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      newPokemon: '',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      pokemons: [
+        {
+          name: 'Totodile',
+          attack: 22,
+          defense: 18
+        },
+        {
+          name: 'Pikachu',
+          attack: 17,
+          defense: 23
+        }
+      ]
     }
   },
   created() {
@@ -43,6 +75,12 @@ export default {
   computed: {
     shortDescription() {
       return this.ellipsize(this.description)
+    },
+    totalDamage() {
+      return this.pokemons
+              .reduce((acc, curr) => ({
+                attack: acc.attack + curr.attack
+              })).attack
     }
   },
   methods: {
@@ -68,6 +106,23 @@ export default {
     },
     decreaseTitleMarginTop() {
       this.modifyTitleMarginTop(oldMarginTop => oldMarginTop - 40)
+    },
+    createPokemon() {
+      if ( ! this.newPokemon ) {
+        return
+      }
+
+      const pokemon = {
+        name: this.newPokemon,
+        attack: Math.floor(Math.random() * 40) + 1,
+        defense: Math.floor(Math.random() * 40) + 1
+      }
+
+      this.pokemons.push(pokemon)
+      // this.pokemons[0] = pokemon
+      // this.$set(this.pokemons, 0, pokemon)
+
+      this.newPokemon = ''
     }
   }
   // components: {
