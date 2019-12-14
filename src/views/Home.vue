@@ -12,6 +12,7 @@
           @keyup.up="decreaseTitleMarginTop"
           @keyup="updateTitle(newTitle)"
           v-model="newTitle"
+          :class="inputClasses"
         )
       .input
         textarea(
@@ -81,9 +82,21 @@ export default {
               .reduce((acc, curr) => ({
                 attack: acc.attack + curr.attack
               })).attack
+    },
+    inputClasses() {
+      console.log('hola')
+      return {
+        'is-danger': this.title.length > 30
+      }
     }
   },
   methods: {
+    // inputClasses() {
+    //   console.log('hola')
+    //   return {
+    //     'is-danger': this.title.length > 30
+    //   }
+    // },
     updateTitle(title) {
       this.title = title
     },
@@ -132,6 +145,10 @@ export default {
 </script>
 
 <style lang="scss">
+  .is-danger {
+    color: red;
+  }
+
   .home {
     width: 850px;
     margin: 0 auto;
