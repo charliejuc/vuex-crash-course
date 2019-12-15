@@ -36,6 +36,8 @@
     
     //- h3 Daño total: {{ pokemons.reduce((acc, curr) => ({ attack: acc.attack + curr.attack })).attack }}
     h3 Daño total: {{ totalDamage }}
+
+    pokemon-list
       
     //- button(
     //-   @click="updateTitle(newTitle)"
@@ -45,6 +47,8 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
+import PokemonList from "@/components/PokemonList.vue";
+
 const descriptionMaxChars = 60
 
 export default {
@@ -84,7 +88,6 @@ export default {
               })).attack
     },
     inputClasses() {
-      console.log('hola')
       return {
         'is-danger': this.title.length > 30
       }
@@ -137,10 +140,10 @@ export default {
 
       this.newPokemon = ''
     }
+  },
+  components: {
+    PokemonList
   }
-  // components: {
-  //   HelloWorld
-  // }
 }
 </script>
 
