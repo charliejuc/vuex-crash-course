@@ -6,7 +6,8 @@
                 v-if="Array.isArray(pokemons)"
             )
                 li(
-                    v-for="pokemon of pokemons"
+                    v-for="pokemon, index of pokemons"
+                    :key="index"
                 ) 
                     template
                         span {{ pokemon.name }} de {{ trainers[pokemon.trainerId].name }} 
@@ -18,8 +19,14 @@
             )
                 template
                     span There are no pokemons
-            
-        h3 Daño total: {{ totalDamage }}
+        
+        template(
+            v-for="trainer, index of trainers"            
+        )
+            h3(
+                :key="index"
+            ) 
+                | Daño total del equipo de {{ trainer.name }}: {{ trainer.totalDamage }}
 </template>
 
 <script>
@@ -72,19 +79,62 @@
 
     export default {
         name: 'PokemonList',
+        data() {
+            const trainers = this.initialTrainers
+                                .map(trainer => Object.assign({
+                                    totalDamage: 0
+                                }, trainer))
+
+            return {
+                trainers
+            }
+        },
         props: {
-            trainers: Array,
+            // trainers: Array,
+            initialTrainers: Array,
             pokemons: Array
         },
         computed: {
             totalDamage() {
+                console.log('Runs totalDamage')
+
                 return Array.isArray(this.pokemons)
                         ? this.pokemons
                             .reduce((acc, curr) => ({
                                 attack: acc.attack + curr.attack
                             })).attack
                         : 0
+            }
+        },
+        watch: {
+            totalDamage: {
+                handler: 'setTrainersTotalDamage',
+                /*
+                    with immediate 'setTrainersTotalDamage' function is triggered just before
+                    'created' vue lifecycle function.
+                */
+                immediate: true
+            }
+        },
+        methods: {
+            setTrainerTotalDamage(trainer, index) {
+                console.log('Runs setTrainerTotalDamage')
+                const pokemons = this.pokemons
+                                    .filter(
+                                        pokemon => pokemon.trainerId === index
+                                    )
+
+                trainer.totalDamage = Array.isArray(pokemons)
+                                                ? pokemons
+                                                    .reduce((acc, curr) => ({
+                                                        attack: acc.attack + curr.attack
+                                                    })).attack
+                                                : 0
             },
+            setTrainersTotalDamage() {
+                this.trainers
+                    .forEach(this.setTrainerTotalDamage)
+            }
         }
     }
 </script>

@@ -26,7 +26,7 @@
         )
 
     pokemon-list(
-      :trainers="trainers"
+      :initialTrainers="trainers"
       :pokemons="pokemons"
     )
 
