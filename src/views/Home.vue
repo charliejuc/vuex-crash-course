@@ -24,24 +24,9 @@
           v-model="newPokemon"
           @keyup.enter="createPokemon"
         )
-    
-    ul
-      li(
-        v-for="pokemon of pokemons"
-      ) 
-        div
-          span {{ pokemon.name }} 
-          input(type="number", v-model.number="pokemon.attack")
-          input(type="number", v-model.number="pokemon.defense")
-    
-    //- h3 Daño total: {{ pokemons.reduce((acc, curr) => ({ attack: acc.attack + curr.attack })).attack }}
-    h3 Daño total: {{ totalDamage }}
 
     pokemon-list
-      
-    //- button(
-    //-   @click="updateTitle(newTitle)"
-    //- ) Write Title
+
 </template>
 
 <script>
@@ -80,12 +65,6 @@ export default {
   computed: {
     shortDescription() {
       return this.ellipsize(this.description)
-    },
-    totalDamage() {
-      return this.pokemons
-              .reduce((acc, curr) => ({
-                attack: acc.attack + curr.attack
-              })).attack
     },
     inputClasses() {
       return {
