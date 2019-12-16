@@ -28,6 +28,7 @@
     pokemon-list(
       :initialTrainers="trainers"
       :pokemons="pokemons"
+      :number="2"
     )
 
 </template>

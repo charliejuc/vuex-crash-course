@@ -77,6 +77,15 @@
         }
     */
 
+    // function Integer(number) {
+    //     this.number = Math.floor(number)
+    //     this.toString = function () {
+    //         return `${this.number}`
+    //     }
+    // }
+
+    // console.log(`${new Integer(3.2)}`)
+
     export default {
         name: 'PokemonList',
         data() {
@@ -92,7 +101,23 @@
         props: {
             // trainers: Array,
             initialTrainers: Array,
-            pokemons: Array
+            pokemons: Array,
+            // number: {
+            //     type: Integer, //instanceof
+            //     default: () => new Integer(0)
+            // },
+            number: {
+                // validator: Number.isInteger
+                validator: value => {
+                    if ( Number.isInteger(value) && value % 2 ) {
+                        return true
+                    }
+
+                    console.error(`'number' only allows odd numbers, got ${value}`)
+                    return false
+                },
+                required: true
+            }
         },
         computed: {
             totalDamage() {
