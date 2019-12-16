@@ -1,0 +1,39 @@
+<template lang="pug">
+    label {{ label }}
+        input(
+            type="text"
+            @input="$emit('input', $event.target.value)"
+            @keyup="keyup"
+            :value="value"
+            v-bind="$attrs"
+        )
+</template>
+
+<script>
+    export default {
+        inheritAttrs: false,
+        name: 'TextInput',
+        props: {
+            label: String,
+            value: String
+        },
+        methods: {
+            keyup(event) {
+                this.$emit('keyup', event)
+            }
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+    .is-danger > input {
+        color: red;
+    }
+
+    input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px;
+        border-radius: .5rem;
+    }
+</style>

@@ -6,12 +6,12 @@
 
     .inputs
       .input
-        input(
-          type="text"
+        text-input(          
           @keyup.down="increaseTitleMarginTop"
           @keyup.up="decreaseTitleMarginTop"
           @keyup="updateTitle(newTitle)"
           v-model="newTitle"
+          label="Título"
           :class="inputClasses"
         )
       .input
@@ -19,10 +19,11 @@
           v-model="description"
         )
       .input
-        input(
-          type="text"
+        text-input(
           v-model="newPokemon"
           @keyup.enter="createPokemon"
+          label="Nombre Pokemon"
+          placeholder="Pikachu"
         )
 
     pokemon-list(
@@ -34,7 +35,8 @@
 
 <script>
 // @ is an alias to /src
-import PokemonList from "@/components/PokemonList.vue";
+import PokemonList from "@/components/PokemonList.vue"
+import TextInput from "@/components/TextInput.vue"
 
 const descriptionMaxChars = 60
 
@@ -95,7 +97,6 @@ export default {
   },
   methods: {
     // inputClasses() {
-    //   console.log('hola')
     //   return {
     //     'is-danger': this.title.length > 30
     //   }
@@ -143,16 +144,13 @@ export default {
     }
   },
   components: {
-    PokemonList
+    PokemonList,
+    TextInput
   }
 }
 </script>
 
 <style lang="scss">
-  .is-danger {
-    color: red;
-  }
-
   .home {
     width: 850px;
     margin: 0 auto;
@@ -171,14 +169,12 @@ export default {
     padding: 0 10px;
     width: inherit;
 
-    textarea, input {
-      box-sizing: border-box;
-      width: 100%;
-      padding: 10px;
-      border-radius: .5rem;
-    }
-
     textarea {
+      box-sizing: border-box;
+      border-radius: .5rem;
+      padding: 10px;
+      width: 100%;
+
       max-height: 500px;
       min-height: 200px;
 
