@@ -25,7 +25,10 @@
           @keyup.enter="createPokemon"
         )
 
-    pokemon-list
+    pokemon-list(
+      :trainers="trainers"
+      :pokemons="pokemons"
+    )
 
 </template>
 
@@ -45,16 +48,28 @@ export default {
       newTitle: title,
       newPokemon: '',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      trainers: [
+        {
+          name: 'Ash Ketchup',
+          birthPlace: 'Tomato Village'
+        },
+        {
+          name: 'Leon',
+          birthPlace: 'Raccoon City'
+        }
+      ],
       pokemons: [
         {
           name: 'Totodile',
           attack: 22,
-          defense: 18
+          defense: 18,
+          trainerId: 0
         },
         {
           name: 'Pikachu',
           attack: 17,
-          defense: 23
+          defense: 23,
+          trainerId: 1
         }
       ]
     }
@@ -110,7 +125,8 @@ export default {
       const pokemon = {
         name: this.newPokemon,
         attack: Math.floor(Math.random() * 40) + 1,
-        defense: Math.floor(Math.random() * 40) + 1
+        defense: Math.floor(Math.random() * 40) + 1,
+        trainerId: Math.floor(Math.random() * this.trainers.length)
       }
 
       this.pokemons.push(pokemon)

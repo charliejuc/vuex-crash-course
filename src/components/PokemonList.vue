@@ -9,9 +9,9 @@
                     v-for="pokemon of pokemons"
                 ) 
                     template
-                        span {{ pokemon.name }} 
-                        input(type="number", v-model.number="pokemon.attack")
-                        input(type="number", v-model.number="pokemon.defense")
+                        span {{ pokemon.name }} de {{ trainers[pokemon.trainerId].name }} 
+                        input(type="number" v-model.number="pokemon.attack")
+                        input(type="number" v-model.number="pokemon.defense")
 
             li(
                 v-else
@@ -72,9 +72,10 @@
 
     export default {
         name: 'PokemonList',
-        props: [
-            'pokemons'
-        ],
+        props: {
+            trainers: Array,
+            pokemons: Array
+        },
         computed: {
             totalDamage() {
                 return Array.isArray(this.pokemons)
