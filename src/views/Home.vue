@@ -26,16 +26,14 @@
         )
 
     pokemon-list(
-      :initialTrainers="trainers"
-      :pokemons="pokemons"
-      :number="2"
+      hello="hello"
+      v-bind="pokemonListAttrs"
     )
 
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import PokemonList from "@/components/PokemonList.vue";
 
 const descriptionMaxChars = 60
@@ -44,35 +42,42 @@ export default {
   name: 'Home',
   data() {
     const title = 'Vue Crash Course'
+    const trainers = [
+      {
+        name: 'Ash Ketchup',
+        birthPlace: 'Tomato Village'
+      },
+      {
+        name: 'Leon',
+        birthPlace: 'Raccoon City'
+      }
+    ]
+    const pokemons = [
+      {
+        name: 'Totodile',
+        attack: 22,
+        defense: 18,
+        trainerId: 0
+      },
+      {
+        name: 'Pikachu',
+        attack: 17,
+        defense: 23,
+        trainerId: 1
+      }
+    ]
+
     return {
       title,
       newTitle: title,
       newPokemon: '',
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      trainers: [
-        {
-          name: 'Ash Ketchup',
-          birthPlace: 'Tomato Village'
-        },
-        {
-          name: 'Leon',
-          birthPlace: 'Raccoon City'
-        }
-      ],
-      pokemons: [
-        {
-          name: 'Totodile',
-          attack: 22,
-          defense: 18,
-          trainerId: 0
-        },
-        {
-          name: 'Pikachu',
-          attack: 17,
-          defense: 23,
-          trainerId: 1
-        }
-      ]
+      pokemonListAttrs: {
+        initialTrainers: trainers,
+        pokemons
+      },
+      trainers,
+      pokemons
     }
   },
   created() {

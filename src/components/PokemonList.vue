@@ -1,7 +1,9 @@
 <template lang="pug">
     .pokemon-list
         h3 Pokemon List
-        ul
+        ul(
+            v-bind="$attrs"
+        )
             template(
                 v-if="Array.isArray(pokemons)"
             )
@@ -87,6 +89,7 @@
     // console.log(`${new Integer(3.2)}`)
 
     export default {
+        inheritAttrs: false,
         name: 'PokemonList',
         data() {
             const trainers = this.initialTrainers
@@ -99,25 +102,8 @@
             }
         },
         props: {
-            // trainers: Array,
             initialTrainers: Array,
-            pokemons: Array,
-            // number: {
-            //     type: Integer, //instanceof
-            //     default: () => new Integer(0)
-            // },
-            number: {
-                // validator: Number.isInteger
-                validator: value => {
-                    if ( Number.isInteger(value) && value % 2 ) {
-                        return true
-                    }
-
-                    console.error(`'number' only allows odd numbers, got ${value}`)
-                    return false
-                },
-                required: true
-            }
+            pokemons: Array
         },
         computed: {
             totalDamage() {
