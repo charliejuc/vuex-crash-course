@@ -88,6 +88,32 @@
 
     // console.log(`${new Integer(3.2)}`)
 
+    function getOnly(obj, keys) {
+        const newObj = {}
+
+        for( let key of keys ) {
+            try {
+                newObj[key] = obj[key]
+            } catch (e) {
+                if ( ! (e instanceof TypeError) ) { // error explained in sheet.js
+                    throw e
+                }
+
+                newObj[key] = undefined
+            }
+        }
+
+        return newObj
+    }
+
+    const compKeys = [
+        '$el',
+        'trainers',
+        'initialTrainers',
+        'totalDamage'
+    ]
+    const getOnlyForComp = obj => getOnly(obj, compKeys)
+
     export default {
         inheritAttrs: false,
         name: 'PokemonList',
@@ -104,6 +130,38 @@
         props: {
             initialTrainers: Array,
             pokemons: Array
+        },
+        beforeCreate() {
+            console.log('beforeCreate', getOnlyForComp(this))
+
+            // socket.on('myEvento', () => {
+            //     console.log('Do something...')
+            // })
+        },
+        created() {
+            console.log('created', getOnlyForComp(this))
+        },
+        beforeMount() {
+            console.log('beforeMount', getOnlyForComp(this))
+        },
+        mounted() {
+            console.log('mounted', getOnlyForComp(this))
+        },
+        beforeUpdate() {
+            console.log('beforeUpdate')
+        },
+        updated() {
+            console.log('updated')
+        },
+        beforeDestroy() {
+            console.log('beforeDestroy', this)
+
+            // socket.off('myEvento', () => {
+            //     console.log('Do something...')
+            // })
+        },
+        destroyed() {
+            console.log('destroyed', this)
         },
         computed: {
             totalDamage() {

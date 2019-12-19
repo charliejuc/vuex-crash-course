@@ -27,7 +27,6 @@
         )
 
     pokemon-list(
-      hello="hello"
       v-bind="pokemonListAttrs"
     )
 

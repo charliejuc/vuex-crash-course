@@ -1,5 +1,6 @@
 <template lang="pug">
     label {{ label }}
+        //- style and class attrs works differently
         input(
             type="text"
             @input="$emit('input', $event.target.value)"
@@ -10,6 +11,7 @@
 </template>
 
 <script>
+
     export default {
         inheritAttrs: false,
         name: 'TextInput',
@@ -19,7 +21,7 @@
         },
         methods: {
             keyup(event) {
-                this.$emit('keyup', event)
+                this.$emit('keyup', event)            
             }
         }
     }
