@@ -200,3 +200,17 @@ export default {
   }
 
 </style>
+
+<style lang="scss" scoped>
+  div /deep/ h1 {
+    color: blue;
+  }
+
+  // div ::v-deep h1 {
+  //   color: red;
+  // }
+
+  // div >>> h1 {
+  //   color: red;
+  // }
+</style>
