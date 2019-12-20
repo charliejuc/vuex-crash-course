@@ -1,63 +1,54 @@
 <template lang="pug">
   .home 
     h1 {{ title.toUpperCase() }} | Company Inc.
-    //- p {{ description.slice(0, 30) + '...' }}
-    p {{ shortDescription }}
+    base-layout
+      //- p {{ description.slice(0, 30) + '...' }}
+      p {{ shortDescription }}
 
-    .inputs
-      .input
-        text-input(          
-          @keyup.down="increaseTitleMarginTop"
-          @keyup.up="decreaseTitleMarginTop"
-          @keyup="updateTitle(newTitle)"
-          v-model="newTitle"
-          label="Título"
-          :class="inputClasses"
-        )
-      .input
-        textarea(
-          v-model="description"
-        )
-      .input
-        text-input(
-          v-model="newPokemon"
-          @keyup.enter="createPokemon"
-          label="Nombre Pokemon"
-          placeholder="Pikachu"
-        )
-      .input
-        label
-          span(
-            v-show="showPokemonList"
-          ) Ocultar Lista de Pokemons
-          span(
-            v-show="!showPokemonList"
-          ) Mostrar Lista de Pokemons
-          input(
-            type="checkbox"
-            v-model="showPokemonList"
+      .inputs
+        .input
+          text-input(          
+            @keyup.down="increaseTitleMarginTop"
+            @keyup.up="decreaseTitleMarginTop"
+            @keyup="updateTitle(newTitle)"
+            v-model="newTitle"
+            label="Título"
+            :class="inputClasses"
           )
-          //- input(
-          //-   type="checkbox"
-          //-   v-model="showPokemonList"
-          //-   true-value="yes"
-          //-   false-value="no"
-          //- )
+        .input
+          textarea(
+            v-model="description"
+          )
+        .input
+          text-input(
+            v-model="newPokemon"
+            @keyup.enter="createPokemon"
+            label="Nombre Pokemon"
+            placeholder="Pikachu"
+          )
+        .input
+          label
+            span(
+              v-show="showPokemonList"
+            ) Ocultar Lista de Pokemons
+            span(
+              v-show="!showPokemonList"
+            ) Mostrar Lista de Pokemons
+            input(
+              type="checkbox"
+              v-model="showPokemonList"
+            )
 
-    pokemon-list(
-      v-show="showPokemonList"
-      v-bind="pokemonListAttrs"
-    )
-
-    //- pokemon-list(
-    //-   v-if="showPokemonList"
-    //-   v-bind="pokemonListAttrs"
-    //- )
+      pokemon-list(
+        v-show="showPokemonList"
+        v-bind="pokemonListAttrs"
+      )
 
 </template>
 
 <script>
 // @ is an alias to /src
+import BaseLayout from "@/layouts/BaseLayout.vue"
 import PokemonList from "@/components/PokemonList.vue"
 import TextInput from "@/components/TextInput.vue"
 
@@ -168,6 +159,7 @@ export default {
     }
   },
   components: {
+    BaseLayout,
     PokemonList,
     TextInput
   }
