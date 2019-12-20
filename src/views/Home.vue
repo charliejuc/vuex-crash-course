@@ -25,10 +25,34 @@
           label="Nombre Pokemon"
           placeholder="Pikachu"
         )
+      .input
+        label
+          span(
+            v-show="showPokemonList"
+          ) Ocultar Lista de Pokemons
+          span(
+            v-show="!showPokemonList"
+          ) Mostrar Lista de Pokemons
+          input(
+            type="checkbox"
+            v-model="showPokemonList"
+          )
+          //- input(
+          //-   type="checkbox"
+          //-   v-model="showPokemonList"
+          //-   true-value="yes"
+          //-   false-value="no"
+          //- )
 
     pokemon-list(
+      v-show="showPokemonList"
       v-bind="pokemonListAttrs"
     )
+
+    //- pokemon-list(
+    //-   v-if="showPokemonList"
+    //-   v-bind="pokemonListAttrs"
+    //- )
 
 </template>
 
@@ -78,7 +102,8 @@ export default {
         pokemons
       },
       trainers,
-      pokemons
+      pokemons,
+      showPokemonList: true
     }
   },
   created() {
