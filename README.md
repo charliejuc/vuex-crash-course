@@ -1,6 +1,6 @@
-# project
+# Vue Crash Course
 
-## Project setup
+## Vue Crash Course setup
 ```
 yarn install
 ```
