@@ -30,7 +30,9 @@
               slot="label"
               slot-scope="{ labelTitle }"
               )
-              h2 Label {{ labelTitle.toUpperCase() }}
+              h2(
+                v-html="`Label ${labelTitle.toUpperCase()}`"
+              )
               h3 Label subtitle
         .input
           label

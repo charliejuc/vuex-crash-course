@@ -21,7 +21,7 @@
         name: 'TextInput',
         data() {
             return {
-                labelTitle: 'Ltitle'
+                labelTitle: 'L<mark>title</mark>'
             }
         },
         props: {
