@@ -1,6 +1,9 @@
 <template lang="pug">
     label
-        slot(name="label") {{ label }}
+        slot(
+            name="label"
+            :labelTitle="labelTitle"
+            ) {{ label }}
         //- style and class attrs works differently
         input(
             type="text"
@@ -8,7 +11,7 @@
             @keyup="keyup"
             :value="value"
             v-bind="$attrs"
-        )
+            )
 </template>
 
 <script>
@@ -16,6 +19,11 @@
     export default {
         inheritAttrs: false,
         name: 'TextInput',
+        data() {
+            return {
+                labelTitle: 'Ltitle'
+            }
+        },
         props: {
             label: String,
             value: String

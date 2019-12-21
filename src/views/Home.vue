@@ -26,14 +26,12 @@
             label="Nombre Pokemon"
             placeholder="Pikachu"
           )
-            //- h2(slot="label") Hola
-
-            template(slot="label")
-              h2 Label title
+            template(
+              slot="label"
+              slot-scope="{ labelTitle }"
+              )
+              h2 Label {{ labelTitle.toUpperCase() }}
               h3 Label subtitle
-            
-            //- h2(slot="label") Label title 2
-            //- h3(slot="label") Label subtitle 2
         .input
           label
             span(
