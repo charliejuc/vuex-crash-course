@@ -1,5 +1,6 @@
 <template lang="pug">
-    label {{ label }}
+    label
+        slot(name="label") {{ label }}
         //- style and class attrs works differently
         input(
             type="text"

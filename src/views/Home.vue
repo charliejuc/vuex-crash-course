@@ -26,6 +26,14 @@
             label="Nombre Pokemon"
             placeholder="Pikachu"
           )
+            //- h2(slot="label") Hola
+
+            template(slot="label")
+              h2 Label title
+              h3 Label subtitle
+            
+            //- h2(slot="label") Label title 2
+            //- h3(slot="label") Label subtitle 2
         .input
           label
             span(
@@ -202,9 +210,9 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-  div /deep/ h1 {
-    color: blue;
-  }
+  // div /deep/ h1 {
+  //   color: blue;
+  // }
 
   // div ::v-deep h1 {
   //   color: red;
