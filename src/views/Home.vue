@@ -1,5 +1,6 @@
 <template lang="pug">
   .home 
+    h1 {{ vuexTitle }}
     h1 {{ title.toUpperCase() }} | Company Inc.
     base-layout
       //- p {{ description.slice(0, 30) + '...' }}
@@ -56,6 +57,7 @@
 
 <script>
 // @ is an alias to /src
+import { mapGetters } from 'vuex'
 import BaseLayout from "@/layouts/BaseLayout.vue"
 import PokemonList from "@/components/PokemonList.vue"
 import TextInput from "@/components/TextInput.vue"
@@ -109,6 +111,9 @@ export default {
     // setTimeout(() => this.updateTitle('Título Ninja 2'), 3000)
   },
   computed: {
+    ...mapGetters({
+      vuexTitle: 'title'
+    }),
     shortDescription() {
       return this.ellipsize(this.description)
     },
