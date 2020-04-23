@@ -1,6 +1,6 @@
-# Vue Crash Course
+# Vuex Crash Course
 
-## Vue Crash Course setup
+## Vuex Crash Course setup
 ```
 yarn install
 ```
