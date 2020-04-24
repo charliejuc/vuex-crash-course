@@ -20,5 +20,10 @@ yarn build
 yarn lint
 ```
 
+## Test Server on port 3000
+```
+node server
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
