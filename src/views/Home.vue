@@ -1,5 +1,6 @@
 <template lang="pug">
   .home 
+    h1 Hola {{ username }}
     h1 {{ vuexTitle }}
     h1 {{ title.toUpperCase() }} | Company Inc.
     base-layout
@@ -58,6 +59,7 @@
 <script>
 // @ is an alias to /src
 import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 import BaseLayout from "@/layouts/BaseLayout.vue"
 import PokemonList from "@/components/PokemonList.vue"
 import TextInput from "@/components/TextInput.vue"
@@ -107,13 +109,20 @@ export default {
       showPokemonList: true
     }
   },
-  created() {
-    // setTimeout(() => this.updateTitle('Título Ninja 2'), 3000)
+  mounted() {
+    let i = 1
+    setInterval(() => {
+      this.GET_USERNAME(i % 3 + 1)
+      ++i
+     }, 1000)
   },
   computed: {
     ...mapGetters({
       vuexTitle: 'title'
     }),
+    ...mapGetters([
+      'username'
+    ]),
     shortDescription() {
       return this.ellipsize(this.description)
     },
@@ -124,6 +133,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'GET_USERNAME'
+    ]),
     // inputClasses() {
     //   return {
     //     'is-danger': this.title.length > 30
