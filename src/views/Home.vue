@@ -58,11 +58,15 @@
 
 <script>
 // @ is an alias to /src
-import { mapGetters } from 'vuex'
-import { mapActions } from 'vuex'
+import { mapGetters, createNamespacedHelpers } from 'vuex'
 import BaseLayout from "@/layouts/BaseLayout.vue"
 import PokemonList from "@/components/PokemonList.vue"
 import TextInput from "@/components/TextInput.vue"
+
+const {
+  mapGetters: userMapGetter,
+  mapActions: userMapActions
+} = createNamespacedHelpers('user')
 
 const descriptionMaxChars = 60
 
@@ -120,7 +124,7 @@ export default {
     ...mapGetters({
       vuexTitle: 'title'
     }),
-    ...mapGetters([
+    ...userMapGetter([
       'username'
     ]),
     shortDescription() {
@@ -133,7 +137,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
+    ...userMapActions([
       'GET_USERNAME'
     ]),
     // inputClasses() {

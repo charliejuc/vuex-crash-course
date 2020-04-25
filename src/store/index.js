@@ -1,28 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import userStore from './user'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+    strict: true,
     state: {
-        title: 'Soy un super título de vuex',
-        username: ''
-    },
-    actions: {
-        async GET_USERNAME({ commit }, pk) {
-            const res = await fetch(`http://localhost:3000/username/${pk}`)
-            const { username } = await res.json()
-
-            commit('SET_USERNAME', username)
-        }
-    },
-    mutations: {
-        SET_USERNAME(state, username) {
-            state.username = username
-        }
+        title: 'Soy un super título de vuex'        
     },
     getters: {
         title: state => state.title,
-        username: state => state.username
+    },
+    modules: {
+        user: userStore
     }
 })
